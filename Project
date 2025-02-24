@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบบันทึกค่าใช้จ่าย</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">ระบบบันทึกค่าใช้จ่าย</h2>
+        <form action="/add" method="post">
+            <div class="mb-3">
+                <label>วันที่:</label>
+                <input type="date" name="date" required class="form-control">
+            </div>
+            <div class="mb-3">
+                <label>คำอธิบาย:</label>
+                <input type="text" name="description" required class="form-control">
+            </div>
+            <div class="mb-3">
+                <label>หมวดหมู่:</label>
+                <input type="text" name="category" required class="form-control">
+            </div>
+            <div class="mb-3">
+                <label>จำนวนเงิน:</label>
+                <input type="number" name="amount" required step="0.01" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">เพิ่มค่าใช้จ่าย</button>
+        </form>
+        <hr>
+        <h3>รายการค่าใช้จ่าย</h3>
+        <ul class="list-group">
+            {% for expense in expenses %}
+            <li class="list-group-item">
+                {{ expense.date }} | {{ expense.description }} | {{ expense.category }} | {{ expense.amount }} บาท
+            </li>
+            {% endfor %}
+        </ul>
+        <h4 class="mt-3">รวมค่าใช้จ่าย: {{ total }} บาท</h4>
+        <a href="/clear" class="btn btn-danger mt-2">ล้างข้อมูล</a>
+    </div>
+</body>
+</html>
